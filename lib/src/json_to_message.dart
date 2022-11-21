@@ -54,6 +54,7 @@ String jsonToMessage(
           }
           return message;
         }
+
         message += listToMessage(datas: loopData);
       } else {
         if (loopData is bool) {
@@ -80,13 +81,16 @@ String jsonToMessage(
             loopData = (data[key] + " " + data["last_name"]);
           }
           if (isHtml) {
-            loopData = (parseHtmlLink(data[key].toString(), "tg://user?id=${data["id"].toString()}"));
+            loopData = (parseHtmlLink(
+                data[key].toString(), "tg://user?id=${data["id"].toString()}"));
           }
         }
         if (key == "language_code") {
-          loopData = (jsonFullMedia["language_code_${data[key]}"] ?? loopData.toString());
+          loopData = (jsonFullMedia["language_code_${data[key]}"] ??
+              loopData.toString());
         }
-        message += "\n${space}${(jsonFullMedia[key] != null) ? jsonFullMedia[key] : key}: $loopData";
+        message +=
+            "\n${space}${(jsonFullMedia[key] != null) ? jsonFullMedia[key] : key}: $loopData";
       }
     } catch (e) {}
   });
