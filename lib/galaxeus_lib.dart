@@ -14,6 +14,7 @@ part 'extension/map.dart';
 part 'extension/string.dart';
 part 'extension/tcp.dart';
 
+part "src/args.dart";
 part 'src/captcha.dart';
 part 'src/device_id.dart';
 part 'src/event_emitter.dart';

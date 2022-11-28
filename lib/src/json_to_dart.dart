@@ -7,7 +7,7 @@ String jsonToDart(
   bool isMain = true,
   bool isUseClassName = false,
   String? comment,
-  bool isStatic = false,
+  bool isStatic = true,
 }) {
   if (isStatic) {
     return jsonToDartStatic(data,
@@ -38,8 +38,8 @@ ${((isMain) ? "// ignore_for_file: non_constant_identifier_names\nimport 'dart:c
 
 
 ${comment}
-class ${className} {
-  late Map rawData;
+class ${className}<K, V> {
+  late Map<K, V> rawData;
 
 """;
   String classData = """
@@ -366,13 +366,23 @@ class ${className} {
 
   classMessage += """
 
+  /// operator map data
+  V? operator [](K key) {
+    return rawData[key];
+  }
+ 
+  /// operator map data
+  void operator []=(K key, V value) {
+    rawData[key] = value;
+  }
+
   /// return original data json
-  Map toMap() {
+  Map<K, V> toMap() {
     return rawData;
   }
 
   /// return original data json
-  Map toJson() {
+  Map<K, V> toJson() {
     return rawData;
   }
 
@@ -401,8 +411,8 @@ ${((isMain) ? "// ignore_for_file: non_constant_identifier_names\nimport 'dart:c
 
 
 ${comment}
-class ${className} {
-  late Map rawData;
+class ${className}<K,V> {
+  late Map<K, V> rawData;
 
   ${comment}
   ${className}(this.rawData);
@@ -549,13 +559,23 @@ class ${className} {
 
   classMessage += """
 
+  /// operator map data
+  V? operator [](K key) {
+    return rawData[key];
+  }
+ 
+  /// operator map data
+  void operator []=(K key, V value) {
+    rawData[key] = value;
+  }
+
   /// return original data json
-  Map toMap() {
+  Map<K, V> toMap() {
     return rawData;
   }
 
   /// return original data json
-  Map toJson() {
+  Map<K, V> toJson() {
     return rawData;
   }
 

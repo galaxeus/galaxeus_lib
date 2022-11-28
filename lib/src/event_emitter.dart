@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 part of galaxeus_lib;
 
 /// Event class. This is send back to the subscriber when an event is triggered,
