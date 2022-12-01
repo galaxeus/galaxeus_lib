@@ -37,19 +37,19 @@ String jsonToMessage(
         }) {
           late String message = "";
           for (var i = 0; i < datas.length; i++) {
-            var loop_data = datas[i];
-            if (loop_data is Map) {
+            var loopData = datas[i];
+            if (loopData is Map) {
               message += jsonToMessage(
-                loop_data,
+                loopData,
                 isHtml: isHtml,
                 jsonFullMedia: jsonFullMedia,
                 isRoot: false,
                 space: space * 8,
               );
-            } else if (loop_data is List) {
-              message += "\n${listToMessage(datas: loop_data)}";
+            } else if (loopData is List) {
+              message += "\n${listToMessage(datas: loopData)}";
             } else {
-              message += "\n${loop_data}";
+              message += "\n${loopData}";
             }
           }
           return message;
