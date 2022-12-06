@@ -10,17 +10,21 @@ String jsonToDart(
   bool isStatic = true,
 }) {
   if (isStatic) {
-    return jsonToDartStatic(data,
-        className: className,
-        isMain: isMain,
-        isUseClassName: isUseClassName,
-        comment: comment);
+    return jsonToDartStatic(
+      data,
+      className: className,
+      isMain: isMain,
+      isUseClassName: isUseClassName,
+      comment: comment,
+    );
   } else {
-    return jsonToDartDynamic(data,
-        className: className,
-        isMain: isMain,
-        isUseClassName: isUseClassName,
-        comment: comment);
+    return jsonToDartDynamic(
+      data,
+      className: className,
+      isMain: isMain,
+      isUseClassName: isUseClassName,
+      comment: comment,
+    );
   }
 }
 
@@ -416,7 +420,21 @@ class ${className}<K,V> {
 
   ${comment}
   ${className}(this.rawData);
+   
+  static Map get defaultData {
+    return ${json.encode(data)};
+  }
+""";
 
+  String classDataCreate = """
+
+  ${comment}
+  static ${className} create({
+
+""";
+  String classDataCreateJson = """{
+    ...${className}.defaultData,
+  
 """;
   data.forEach((key, value) {
     String nameClass = key.camelCaseClass();
@@ -426,27 +444,71 @@ class ${className}<K,V> {
 
     if (value is String) {
       classMessage += textToFunction(
-          key: key,
-          className: className,
-          returnType: "String",
-          comment: comment);
+        key: key,
+        className: className,
+        returnType: "String",
+        comment: comment,
+        paramFunction: (text) {
+          classDataCreate += text;
+        },
+        paramJson: (text) {
+          classDataCreateJson += text;
+        },
+      );
     }
     if (value is int) {
       classMessage += textToFunction(
-          key: key, className: className, returnType: "int", comment: comment);
+        key: key,
+        className: className,
+        returnType: "int",
+        comment: comment,
+        paramFunction: (text) {
+          classDataCreate += text;
+        },
+        paramJson: (text) {
+          classDataCreateJson += text;
+        },
+      );
     } else if (value is double) {
       classMessage += textToFunction(
-          key: key,
-          className: className,
-          returnType: "double",
-          comment: comment);
+        key: key,
+        className: className,
+        returnType: "double",
+        comment: comment,
+        paramFunction: (text) {
+          classDataCreate += text;
+        },
+        paramJson: (text) {
+          classDataCreateJson += text;
+        },
+      );
     } else if (value is num) {
       classMessage += textToFunction(
-          key: key, className: className, returnType: "num", comment: comment);
+        key: key,
+        className: className,
+        returnType: "num",
+        comment: comment,
+        paramFunction: (text) {
+          classDataCreate += text;
+        },
+        paramJson: (text) {
+          classDataCreateJson += text;
+        },
+      );
     }
     if (value is bool) {
       classMessage += textToFunction(
-          key: key, className: className, returnType: "bool", comment: comment);
+        key: key,
+        className: className,
+        returnType: "bool",
+        comment: comment,
+        paramFunction: (text) {
+          classDataCreate += text;
+        },
+        paramJson: (text) {
+          classDataCreateJson += text;
+        },
+      );
     }
     if (value is Map) {
       classMessage += textToFunction(
@@ -456,6 +518,12 @@ class ${className}<K,V> {
         isClass: true,
         isUseClassName: isUseClassName,
         comment: comment,
+        paramFunction: (text) {
+          classDataCreate += text;
+        },
+        paramJson: (text) {
+          classDataCreateJson += text;
+        },
       );
       classMessages.add(jsonToDart(value.cast<String, dynamic>(),
           className: nameClass,
@@ -475,6 +543,12 @@ class ${className}<K,V> {
             isUseClassName: isUseClassName,
             isList: true,
             comment: comment,
+            paramFunction: (text) {
+              classDataCreate += text;
+            },
+            paramJson: (text) {
+              classDataCreateJson += text;
+            },
           );
           classMessages.add(jsonToDart(
               (value.first as Map).cast<String, dynamic>(),
@@ -485,77 +559,141 @@ class ${className}<K,V> {
         }
         if (value.first is bool) {
           classMessage += textToFunction(
-              key: key,
-              className: className,
-              returnType: "bool",
-              isClass: false,
-              isList: true,
-              comment: comment);
+            key: key,
+            className: className,
+            returnType: "bool",
+            isClass: false,
+            isList: true,
+            comment: comment,
+            paramFunction: (text) {
+              classDataCreate += text;
+            },
+            paramJson: (text) {
+              classDataCreateJson += text;
+            },
+          );
         }
         if (value.first is String) {
           classMessage += textToFunction(
-              key: key,
-              className: className,
-              returnType: "String",
-              isClass: false,
-              isList: true,
-              comment: comment);
+            key: key,
+            className: className,
+            returnType: "String",
+            isClass: false,
+            isList: true,
+            comment: comment,
+            paramFunction: (text) {
+              classDataCreate += text;
+            },
+            paramJson: (text) {
+              classDataCreateJson += text;
+            },
+          );
         }
         if (value.first is int) {
           classMessage += textToFunction(
-              key: key,
-              className: className,
-              returnType: "int",
-              isClass: false,
-              isList: true,
-              comment: comment);
+            key: key,
+            className: className,
+            returnType: "int",
+            isClass: false,
+            isList: true,
+            comment: comment,
+            paramFunction: (text) {
+              classDataCreate += text;
+            },
+            paramJson: (text) {
+              classDataCreateJson += text;
+            },
+          );
         } else if (value.first is double) {
           classMessage += textToFunction(
-              key: key,
-              className: className,
-              returnType: "double",
-              isClass: false,
-              isList: true,
-              comment: comment);
+            key: key,
+            className: className,
+            returnType: "double",
+            isClass: false,
+            isList: true,
+            comment: comment,
+            paramFunction: (text) {
+              classDataCreate += text;
+            },
+            paramJson: (text) {
+              classDataCreateJson += text;
+            },
+          );
         } else if (value.first is num) {
           classMessage += textToFunction(
-              key: key,
-              className: className,
-              returnType: "num",
-              isClass: false,
-              isList: true,
-              comment: comment);
+            key: key,
+            className: className,
+            returnType: "num",
+            isClass: false,
+            isList: true,
+            comment: comment,
+            paramFunction: (text) {
+              classDataCreate += text;
+            },
+            paramJson: (text) {
+              classDataCreateJson += text;
+            },
+          );
         }
         if (value.first == null) {
           classMessage += textToFunction(
-              key: key,
-              className: className,
-              returnType: "Object",
-              isClass: false,
-              isList: true,
-              comment: comment);
-        }
-      } else {
-        classMessage += textToFunction(
             key: key,
             className: className,
             returnType: "Object",
             isClass: false,
             isList: true,
-            comment: comment);
+            comment: comment,
+            paramFunction: (text) {
+              classDataCreate += text;
+            },
+            paramJson: (text) {
+              classDataCreateJson += text;
+            },
+          );
+        }
+      } else {
+        classMessage += textToFunction(
+          key: key,
+          className: className,
+          returnType: "Object",
+          isClass: false,
+          isList: true,
+          comment: comment,
+          paramFunction: (text) {
+            classDataCreate += text;
+          },
+          paramJson: (text) {
+            classDataCreateJson += text;
+          },
+        );
       }
     }
 
     if (value == null) {
       classMessage += textToFunction(
-          key: key,
-          className: className,
-          returnType: "Object",
-          isClass: false,
-          isList: false,
-          comment: comment);
+        key: key,
+        className: className,
+        returnType: "Object",
+        isClass: false,
+        isList: false,
+        comment: comment,
+        paramFunction: (text) {
+          classDataCreate += text;
+        },
+        paramJson: (text) {
+          classDataCreateJson += text;
+        },
+      );
     }
   });
+
+  classDataCreateJson += "\n\n  }";
+  classDataCreate += "})  {";
+  classDataCreate += "\n\nreturn ${className}(${classDataCreateJson});";
+
+  classDataCreate += "\n\n      }";
+
+  classMessage += classDataCreate;
 
   classMessage += """
 
@@ -590,14 +728,17 @@ class ${className}<K,V> {
   return classMessage;
 }
 
-String textToFunction(
-    {required String key,
-    required String returnType,
-    required String className,
-    bool isClass = false,
-    bool isList = false,
-    bool isUseClassName = false,
-    String? comment}) {
+String textToFunction({
+  required String key,
+  required String returnType,
+  required String className,
+  bool isClass = false,
+  bool isList = false,
+  bool isUseClassName = false,
+  String? comment,
+  required void Function(String text) paramFunction,
+  required void Function(String text) paramJson,
+}) {
   comment ??= "";
   String nameClass = key.camelCaseClass();
   if (isUseClassName) {
@@ -608,6 +749,12 @@ String textToFunction(
       key.replaceAll(RegExp(r"^(@|[0-9]+)", caseSensitive: false), "special_");
   if (isClass) {
     if (isList) {
+      paramFunction.call("""
+      List<${nameClass}?>? ${nameMethod},
+""");
+      paramJson.call("""
+      "${key}": (${nameMethod} != null)? ${nameMethod}.map((res) => res!.toJson()).toList().cast<Map>(): null,
+""");
       return """
   ${comment}
   List<${nameClass}?>? get ${nameMethod} {
@@ -623,6 +770,12 @@ String textToFunction(
 
 """;
     }
+    paramFunction.call("""
+      ${nameClass}? ${nameMethod},
+""");
+    paramJson.call("""
+      "${key}": (${nameMethod} != null)?${nameMethod}.toJson(): null,
+""");
     return """
 
   ${comment}
@@ -640,6 +793,12 @@ String textToFunction(
 """;
   }
   if (isList) {
+    paramFunction.call("""
+      List<${returnType}?>? ${nameMethod},
+""");
+    paramJson.call("""
+      "${key}": ${nameMethod},
+""");
     return """
 
   ${comment}
@@ -656,6 +815,12 @@ String textToFunction(
 
 """;
   }
+  paramFunction.call("""
+    $returnType? ${nameMethod},
+""");
+  paramJson.call("""
+      "${key}": ${nameMethod},
+""");
 
   return """
 
