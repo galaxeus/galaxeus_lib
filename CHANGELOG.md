@@ -1,3 +1,6 @@
+## 0.0.31
+- Add improve json to dart
+
 ## 0.0.29
 - Add improve json to dart
 

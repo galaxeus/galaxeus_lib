@@ -1,6 +1,6 @@
 name: galaxeus_lib
 description: All in one library for help you make easy app on cross platform and support server side, inclue tcp, fetch, event emitter, websocket, and more.
-version: 0.0.30
+version: 0.0.31
 homepage: https://youtube.com/@galaxeusdev
 repository: https://github.com/galaxeus/galaxeus_lib
 issue_tracker: https://github.com/galaxeus/galaxeus_lib/issues

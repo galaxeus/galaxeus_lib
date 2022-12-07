@@ -52,12 +52,23 @@ class Root<K, V> {
     String? baru,
     Data? data,
   }) {
-    return Root({
-      ...Root.defaultData,
+    late Map jsonData = Root.defaultData;
+    late Map jsonCreate = {
       "@type": special_type,
       "baru": baru,
       "data": (data != null) ? data.toJson() : null,
+    };
+
+    jsonCreate.forEach((key, value) {
+      try {
+        if (value != null) {
+          jsonData[key] = value;
+        }
+      } catch (e, stack) {
+        print("Root ${e.toString()}, ${stack.toString()}");
+      }
     });
+    return Root(jsonData);
   }
 
   /// operator map data
@@ -122,11 +133,22 @@ class Data<K, V> {
     String? special_type,
     bool? is_login,
   }) {
-    return Data({
-      ...Data.defaultData,
+    late Map jsonData = Data.defaultData;
+    late Map jsonCreate = {
       "@type": special_type,
       "is_login": is_login,
+    };
+
+    jsonCreate.forEach((key, value) {
+      try {
+        if (value != null) {
+          jsonData[key] = value;
+        }
+      } catch (e, stack) {
+        print("Data ${e.toString()}, ${stack.toString()}");
+      }
     });
+    return Data(jsonData);
   }
 
   /// operator map data
