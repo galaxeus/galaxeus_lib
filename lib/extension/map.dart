@@ -10,8 +10,7 @@ extension GalaxeusExtensionMap on Map {
     return cast<T, K>();
   }
 
-  Map<T, K> filterByKeys<T, K>(List<String> keys,
-      {bool isAllowValueNull = true}) {
+  Map<T, K> filterByKeys<T, K>(List<String> keys, {bool isAllowValueNull = true}) {
     late Map<T, K> jsonData = {};
     forEach((key, value) {
       if (keys.contains(key)) {
@@ -23,7 +22,7 @@ extension GalaxeusExtensionMap on Map {
           }
         }
       }
-    });
+    }); 
     return jsonData;
   }
 

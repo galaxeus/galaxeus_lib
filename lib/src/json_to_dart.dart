@@ -42,8 +42,8 @@ ${((isMain) ? "// ignore_for_file: non_constant_identifier_names\nimport 'dart:c
 
 
 ${comment}
-class ${className}<K, V> {
-  late Map<K, V> rawData;
+class ${className} {
+  late Map rawData;
 
 """;
   String classData = """
@@ -169,7 +169,11 @@ class ${className}<K, V> {
           classDataCreateJson += text;
         },
       );
-      classMessages.add(jsonToDartDynamic(value.cast<String, dynamic>(), className: nameClass, isMain: false, isUseClassName: isUseClassName, comment: comment));
+      classMessages.add(jsonToDartDynamic(value.cast<String, dynamic>(),
+          className: nameClass,
+          isMain: false,
+          isUseClassName: isUseClassName,
+          comment: comment));
     }
 
     if (value is List) {
@@ -193,7 +197,12 @@ class ${className}<K, V> {
               classDataCreateJson += text;
             },
           );
-          classMessages.add(jsonToDartDynamic((value.first as Map).cast<String, dynamic>(), className: nameClass, isMain: false, isUseClassName: isUseClassName, comment: comment));
+          classMessages.add(jsonToDartDynamic(
+              (value.first as Map).cast<String, dynamic>(),
+              className: nameClass,
+              isMain: false,
+              isUseClassName: isUseClassName,
+              comment: comment));
         }
         if (value.first is bool) {
           classMessage += textToFunctionDynamic(
@@ -362,22 +371,22 @@ class ${className}<K, V> {
   classMessage += """
 
   /// operator map data
-  V? operator [](K key) {
+   operator [](key) {
     return rawData[key];
   }
  
   /// operator map data
-  void operator []=(K key, V value) {
+  void operator []=(key, value) {
     rawData[key] = value;
   }
 
   /// return original data json
-  Map<K, V> toMap() {
+  Map toMap() {
     return rawData;
   }
 
   /// return original data json
-  Map<K, V> toJson() {
+  Map toJson() {
     return rawData;
   }
 
@@ -406,8 +415,8 @@ ${((isMain) ? "// ignore_for_file: non_constant_identifier_names\nimport 'dart:c
 
 
 ${comment}
-class ${className}<K,V> {
-  late Map<K, V> rawData;
+class ${className} {
+  late Map rawData;
 
   ${comment}
   ${className}(this.rawData);
@@ -517,7 +526,11 @@ class ${className}<K,V> {
           classDataCreateJson += text;
         },
       );
-      classMessages.add(jsonToDart(value.cast<String, dynamic>(), className: nameClass, isMain: false, isUseClassName: isUseClassName, comment: comment));
+      classMessages.add(jsonToDart(value.cast<String, dynamic>(),
+          className: nameClass,
+          isMain: false,
+          isUseClassName: isUseClassName,
+          comment: comment));
     }
 
     if (value is List) {
@@ -538,7 +551,12 @@ class ${className}<K,V> {
               classDataCreateJson += text;
             },
           );
-          classMessages.add(jsonToDart((value.first as Map).cast<String, dynamic>(), className: nameClass, isMain: false, isUseClassName: isUseClassName, comment: comment));
+          classMessages.add(jsonToDart(
+              (value.first as Map).cast<String, dynamic>(),
+              className: nameClass,
+              isMain: false,
+              isUseClassName: isUseClassName,
+              comment: comment));
         }
         if (value.first is bool) {
           classMessage += textToFunction(
@@ -694,22 +712,22 @@ return ${className}(jsonData);""";
   classMessage += """
 
   /// operator map data
-  V? operator [](K key) {
+   operator [](key) {
     return rawData[key];
   }
  
   /// operator map data
-  void operator []=(K key, V value) {
+  void operator []=(key, value) {
     rawData[key] = value;
   }
 
   /// return original data json
-  Map<K, V> toMap() {
+  Map toMap() {
     return rawData;
   }
 
   /// return original data json
-  Map<K, V> toJson() {
+  Map toJson() {
     return rawData;
   }
 
@@ -741,7 +759,8 @@ String textToFunction({
     nameClass = "${className}${key.camelCaseClass()}";
   }
 
-  String nameMethod = key.replaceAll(RegExp(r"^(@|[0-9]+)", caseSensitive: false), "special_");
+  String nameMethod =
+      key.replaceAll(RegExp(r"^(@|[0-9]+)", caseSensitive: false), "special_");
   if (isClass) {
     if (isList) {
       paramFunction.call("""
@@ -852,7 +871,8 @@ String textToFunctionDynamic({
     nameClass = "${className}${key.camelCaseClass()}";
   }
 
-  String nameMethod = key.replaceAll(RegExp(r"^(@|[0-9]+)", caseSensitive: false), "special_");
+  String nameMethod =
+      key.replaceAll(RegExp(r"^(@|[0-9]+)", caseSensitive: false), "special_");
   if (isClass) {
     if (isList) {
       paramFunction.call("""

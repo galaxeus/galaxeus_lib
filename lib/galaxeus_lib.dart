@@ -11,6 +11,7 @@ import 'package:collection/collection.dart';
 
 part 'extension/list.dart';
 part 'extension/map.dart';
+part 'extension/regexp.dart';
 part 'extension/string.dart';
 part 'extension/tcp.dart';
 
@@ -35,8 +36,7 @@ String getUuid(int length, {String? text}) {
     ch = text;
   }
   Random r = Random();
-  return String.fromCharCodes(
-      Iterable.generate(length, (_) => ch.codeUnitAt(r.nextInt(ch.length))));
+  return String.fromCharCodes(Iterable.generate(length, (_) => ch.codeUnitAt(r.nextInt(ch.length))));
 }
 
 T getRandomElement<T>(List<T> list) {

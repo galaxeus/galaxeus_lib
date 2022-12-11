@@ -14,3 +14,16 @@ extension GalaxeusExtensionList on List {
     return random_datas;
   }
 }
+
+extension GalaxeusRegExpExtensionList on List<RegExp> { 
+
+  bool hashData(dynamic input) {
+    for (var i = 0; i < length; i++) {
+      RegExp regExp = this[i];
+      if (regExp.hashData(input)) {
+        return true;
+      }
+    }
+    return false;
+  }
+}

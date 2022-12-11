@@ -1,3 +1,9 @@
+## 0.0.33
+- add extension regexp and list regexp
+
+## 0.0.31
+- fix json to dart
+
 ## 0.0.31
 - Add improve json to dart
 
