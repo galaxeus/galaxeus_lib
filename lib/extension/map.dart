@@ -22,7 +22,7 @@ extension GalaxeusExtensionMap on Map {
           }
         }
       }
-    }); 
+    });
     return jsonData;
   }
 

@@ -1,8 +1,6 @@
-
 part of galaxeus_lib;
- 
 
-extension GalaxeusRegExpExtension on RegExp { 
+extension GalaxeusRegExpExtension on RegExp {
   bool hashData(dynamic input) {
     try {
       if (input is String == false) {

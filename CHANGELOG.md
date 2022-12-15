@@ -1,3 +1,6 @@
+## 0.0.34
+- add json each List and map
+
 ## 0.0.33
 - add extension regexp and list regexp
 

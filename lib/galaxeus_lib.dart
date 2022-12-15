@@ -13,6 +13,7 @@ part 'extension/list.dart';
 part 'extension/map.dart';
 part 'extension/regexp.dart';
 part 'extension/string.dart';
+
 part 'extension/tcp.dart';
 
 part "src/args.dart";
@@ -20,6 +21,7 @@ part 'src/captcha.dart';
 part 'src/device_id.dart';
 part 'src/event_emitter.dart';
 part 'src/fetch.dart';
+part "src/json_each.dart";
 part 'src/json_to_dart.dart';
 part "src/json_to_message.dart";
 part 'src/json_to_update.dart';

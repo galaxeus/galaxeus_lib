@@ -15,8 +15,7 @@ extension GalaxeusExtensionList on List {
   }
 }
 
-extension GalaxeusRegExpExtensionList on List<RegExp> { 
-
+extension GalaxeusRegExpExtensionList on List<RegExp> {
   bool hashData(dynamic input) {
     for (var i = 0; i < length; i++) {
       RegExp regExp = this[i];
