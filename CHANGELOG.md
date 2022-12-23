@@ -1,3 +1,6 @@
+## 0.0.35
+- add json to isar
+
 ## 0.0.34
 - add json each List and map
 
