@@ -1,5 +1,3 @@
-part of galaxeus_lib;
-
 extension GalaxeusExtensionString on String {
   String hideData({int start = 2, int end = 2}) {
     var message = "";

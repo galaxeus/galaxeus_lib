@@ -1,7 +1,5 @@
 // ignore_for_file: non_constant_identifier_names
 
-part of galaxeus_lib;
-
 /// Event class. This is send back to the subscriber when an event is triggered,
 /// Subscriber can use the instance to retrieve the event data and other event related parameters.
 /// eventName is a mandatory parameter and will represent the current event.
@@ -117,8 +115,7 @@ class EventEmitter {
 
     if (_listeners.containsKey(eventName)) {
       var subs = _listeners[eventName]!;
-      subs.removeWhere((element) =>
-          element.eventName == eventName && element.callback == callback);
+      subs.removeWhere((element) => element.eventName == eventName && element.callback == callback);
     }
   }
 
@@ -176,8 +173,7 @@ class EventEmitter {
   int get count => _listeners.length;
 
   /// Get the list of subscribers for a particular event.
-  int getListenersCount(String event) =>
-      _listeners.containsKey(event) ? _listeners[event]!.length : 0;
+  int getListenersCount(String event) => _listeners.containsKey(event) ? _listeners[event]!.length : 0;
 }
 
 /// Handler for cancelling the event registration.

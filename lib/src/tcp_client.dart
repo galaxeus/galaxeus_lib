@@ -1,9 +1,14 @@
 // ignore_for_file: non_constant_identifier_names, unused_local_variable, empty_catches
 
-part of galaxeus_lib;
+import 'dart:async';
+import 'dart:convert';
+import 'dart:typed_data';
+
+import 'package:galaxeus_lib/galaxeus_lib.dart';
+import 'package:universal_io/io.dart';
 
 class TcpSocketClient {
-  late EventEmitter emitter = EventEmitter();
+  EventEmitter emitter = EventEmitter();
   late Socket socket;
   late dynamic host;
   late int port;
@@ -38,8 +43,7 @@ class TcpSocketClient {
       emitter = eventEmitter;
     }
   }
-  Listener on(String typeUpdate, dynamic Function(dynamic update) callback,
-      Object? context) {
+  Listener on(String typeUpdate, dynamic Function(dynamic update) callback, Object? context) {
     return emitter.on(typeUpdate, context, (ev, context) {
       if (ev.eventData != null) {
         callback.call(ev.eventData);
@@ -77,11 +81,9 @@ class TcpSocketClient {
             onDone: () async {
               isConnect = false;
               if (onDataConnection != null) {
-                onDataConnection
-                    .call({"@type": "connection", "status": "disconnect"});
+                onDataConnection.call({"@type": "connection", "status": "disconnect"});
               } else {
-                emitter.emit(event_socket_connection, null,
-                    {"@type": "connection", "status": "disconnect"});
+                emitter.emit(event_socket_connection, null, {"@type": "connection", "status": "disconnect"});
               }
               Timer.periodic(ping_interval, (timer) async {
                 if (onDataConnection != null) {
@@ -90,8 +92,7 @@ class TcpSocketClient {
                     "status": "reconnect",
                   });
                 } else {
-                  emitter.emit(event_socket_connection, null,
-                      {"@type": "connection", "status": "reconnect"});
+                  emitter.emit(event_socket_connection, null, {"@type": "connection", "status": "reconnect"});
                 }
                 try {
                   await connect(
@@ -108,11 +109,9 @@ class TcpSocketClient {
           );
           isConnect = true;
           if (onDataConnection != null) {
-            onDataConnection
-                .call({"@type": "connection", "status": "connected"});
+            onDataConnection.call({"@type": "connection", "status": "connected"});
           } else {
-            emitter.emit(event_socket_connection, null,
-                {"@type": "connection", "status": "connected"});
+            emitter.emit(event_socket_connection, null, {"@type": "connection", "status": "connected"});
           }
           break;
         } catch (e) {

@@ -1,6 +1,10 @@
 // ignore_for_file: unused_local_variable, non_constant_identifier_names
 
-part of galaxeus_lib;
+import 'dart:async';
+import 'dart:convert';
+
+import 'package:galaxeus_lib/galaxeus_lib.dart';
+import 'package:universal_io/io.dart';
 
 class WebSocketClient {
   late String url;
@@ -84,12 +88,9 @@ class WebSocketClient {
                   "status": "disconnect",
                 });
               }
-              Timer.periodic(pingInterval ?? Duration(seconds: 2),
-                  (timer) async {
+              Timer.periodic(pingInterval ?? Duration(seconds: 2), (timer) async {
                 try {
-                  await connect(
-                      onDataUpdate: onDataUpdate,
-                      onDataConnection: onDataConnection);
+                  await connect(onDataUpdate: onDataUpdate, onDataConnection: onDataConnection);
                 } catch (e) {}
                 if (isConnect) {
                   timer.cancel();
@@ -130,8 +131,7 @@ class WebSocketClient {
                 "status": "reconnection",
               });
             }
-            await connect(
-                onDataUpdate: onDataUpdate, onDataConnection: onDataConnection);
+            await connect(onDataUpdate: onDataUpdate, onDataConnection: onDataConnection);
           } catch (e) {
             if (onDataConnection != null) {
               onDataConnection.call({
@@ -150,8 +150,7 @@ class WebSocketClient {
     }
   }
 
-  Listener on(String name, Function(dynamic update) callback,
-      {bool isThrowError = false}) {
+  Listener on(String name, Function(dynamic update) callback, {bool isThrowError = false}) {
     return event_emitter.on(name, null, (ev, context) {
       try {
         if (ev.eventData != null) {

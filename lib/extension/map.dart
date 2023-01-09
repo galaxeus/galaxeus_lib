@@ -1,5 +1,3 @@
-part of galaxeus_lib;
-
 extension GalaxeusExtensionMap on Map {
   Map<T, K> removeValueNull<T, K>() {
     forEach((key, value) {

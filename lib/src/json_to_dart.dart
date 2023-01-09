@@ -1,5 +1,7 @@
-// ignore_for_file: unnecessary_brace_in_string_interps
-part of galaxeus_lib;
+// ignore_for_file: unnecessary_brace_in_string_interps, non_constant_identifier_names
+//
+
+import 'dart:convert';
 
 String jsonToDart(
   Map<String, dynamic> data, {
@@ -169,11 +171,7 @@ class ${className} {
           classDataCreateJson += text;
         },
       );
-      classMessages.add(jsonToDartDynamic(value.cast<String, dynamic>(),
-          className: nameClass,
-          isMain: false,
-          isUseClassName: isUseClassName,
-          comment: comment));
+      classMessages.add(jsonToDartDynamic(value.cast<String, dynamic>(), className: nameClass, isMain: false, isUseClassName: isUseClassName, comment: comment));
     }
 
     if (value is List) {
@@ -197,12 +195,7 @@ class ${className} {
               classDataCreateJson += text;
             },
           );
-          classMessages.add(jsonToDartDynamic(
-              (value.first as Map).cast<String, dynamic>(),
-              className: nameClass,
-              isMain: false,
-              isUseClassName: isUseClassName,
-              comment: comment));
+          classMessages.add(jsonToDartDynamic((value.first as Map).cast<String, dynamic>(), className: nameClass, isMain: false, isUseClassName: isUseClassName, comment: comment));
         }
         if (value.first is bool) {
           classMessage += textToFunctionDynamic(
@@ -387,7 +380,7 @@ class ${className} {
 
   /// return original data json
   Map toJson() {
-    return rawData;
+    return rawData;return
   }
 
   /// return string data encode json original data
@@ -526,11 +519,7 @@ class ${className} {
           classDataCreateJson += text;
         },
       );
-      classMessages.add(jsonToDart(value.cast<String, dynamic>(),
-          className: nameClass,
-          isMain: false,
-          isUseClassName: isUseClassName,
-          comment: comment));
+      classMessages.add(jsonToDart(value.cast<String, dynamic>(), className: nameClass, isMain: false, isUseClassName: isUseClassName, comment: comment));
     }
 
     if (value is List) {
@@ -551,12 +540,7 @@ class ${className} {
               classDataCreateJson += text;
             },
           );
-          classMessages.add(jsonToDart(
-              (value.first as Map).cast<String, dynamic>(),
-              className: nameClass,
-              isMain: false,
-              isUseClassName: isUseClassName,
-              comment: comment));
+          classMessages.add(jsonToDart((value.first as Map).cast<String, dynamic>(), className: nameClass, isMain: false, isUseClassName: isUseClassName, comment: comment));
         }
         if (value.first is bool) {
           classMessage += textToFunction(
@@ -759,8 +743,7 @@ String textToFunction({
     nameClass = "${className}${key.camelCaseClass()}";
   }
 
-  String nameMethod =
-      key.replaceAll(RegExp(r"^(@|[0-9]+)", caseSensitive: false), "special_");
+  String nameMethod = key.replaceAll(RegExp(r"^(@|[0-9]+)", caseSensitive: false), "special_");
   if (isClass) {
     if (isList) {
       paramFunction.call("""
@@ -871,8 +854,7 @@ String textToFunctionDynamic({
     nameClass = "${className}${key.camelCaseClass()}";
   }
 
-  String nameMethod =
-      key.replaceAll(RegExp(r"^(@|[0-9]+)", caseSensitive: false), "special_");
+  String nameMethod = key.replaceAll(RegExp(r"^(@|[0-9]+)", caseSensitive: false), "special_");
   if (isClass) {
     if (isList) {
       paramFunction.call("""

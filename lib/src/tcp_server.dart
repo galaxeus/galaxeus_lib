@@ -1,6 +1,9 @@
 // ignore_for_file: non_constant_identifier_names
 
-part of galaxeus_lib;
+import 'dart:typed_data';
+
+import 'package:galaxeus_lib/galaxeus_lib.dart';
+import 'package:universal_io/io.dart';
 
 class TcpSocketServer {
   EventEmitter emitter = EventEmitter();

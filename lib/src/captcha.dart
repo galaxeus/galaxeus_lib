@@ -1,4 +1,6 @@
-part of galaxeus_lib;
+import 'dart:math';
+
+import 'package:collection/collection.dart';
 
 class Captcha {
   List<Map<String, String>> animalEmoji = [

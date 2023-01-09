@@ -1,4 +1,4 @@
-part of galaxeus_lib;
+
 
 Map jsonUpdate({required Map data, required Map newData}) {
   newData.forEach((key, value) {
@@ -21,11 +21,11 @@ Map jsonUpdate({required Map data, required Map newData}) {
     } else if (value is List) {
       if (data.containsKey(key)) {
         if (data[key] is List) {
-          late List dataSubs = (data[key] as List);
-          late List newDataSubs = (newData[key] as List);
+          List dataSubs = (data[key] as List);
+          List newDataSubs = (newData[key] as List);
           if (dataSubs.first is Map) {
             if (newDataSubs.first is Map) {
-              late Map dataMap = {};
+               Map dataMap = {};
               (dataSubs.first as Map).forEach((keySub, valueSub) {
                 dataMap[keySub] = valueSub;
               });

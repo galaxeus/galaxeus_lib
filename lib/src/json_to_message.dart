@@ -1,5 +1,4 @@
-// ignore_for_file: unnecessary_brace_in_string_interps, empty_catches
-part of galaxeus_lib;
+// ignore_for_file: unnecessary_brace_in_string_interps, empty_catches 
 
 String jsonToMessage(
   Map data, {

@@ -1,4 +1,6 @@
-part of galaxeus_lib;
+import 'dart:convert';
+
+import 'package:universal_io/io.dart';
 
 extension TcpSendDataSocket on Socket {
   void send(List<int> data) {

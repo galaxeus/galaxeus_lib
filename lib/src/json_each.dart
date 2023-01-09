@@ -1,4 +1,5 @@
-part of galaxeus_lib;
+// ignore_for_file: unnecessary_brace_in_string_interps, non_constant_identifier_names
+//
 
 Map jsonEach({
   required Map data,
@@ -10,7 +11,7 @@ Map jsonEach({
     if (value is Map) {
       jsonData[key] = jsonEach(data: value, builder: builder);
     } else if (value is List) {
-      jsonData[key] = jsonListEach(key: key, data: value, builder: builder); 
+      jsonData[key] = jsonListEach(key: key, data: value, builder: builder);
     } else {
       jsonData[key] = builder(key, value, false, false);
     }

@@ -1,9 +1,8 @@
-part of galaxeus_lib;
+import 'dart:io';
 
 DeviceId? getDeviceId({bool isGetProductId = false}) {
   if (Platform.isAndroid) {
-    ProcessResult res =
-        Process.runSync("settings", ["get", "secure", "android_id"]);
+    ProcessResult res = Process.runSync("settings", ["get", "secure", "android_id"]);
     return DeviceId(res);
   }
 
@@ -41,11 +40,7 @@ class DeviceId {
 
   String get deviceId {
     if (Platform.isWindows) {
-      return RegExp(r"([a-z0-9]+)-([a-z0-9]+)-([a-z0-9]+)-([a-z0-9]+)",
-                  caseSensitive: false)
-              .stringMatch(
-                  data.stdout.toString().replaceAll(RegExp(r"\n"), "")) ??
-          "";
+      return RegExp(r"([a-z0-9]+)-([a-z0-9]+)-([a-z0-9]+)-([a-z0-9]+)", caseSensitive: false).stringMatch(data.stdout.toString().replaceAll(RegExp(r"\n"), "")) ?? "";
     }
     return data.stdout.toString().replaceAll(RegExp(r"\n"), "");
   }

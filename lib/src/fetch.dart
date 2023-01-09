@@ -1,6 +1,8 @@
 // ignore_for_file: empty_catches
 
-part of galaxeus_lib;
+import 'dart:convert';
+
+import 'package:http/http.dart';
 
 Future<Response> fetch(
   String url, {
@@ -28,17 +30,13 @@ Future<Response> fetch(
   if (method == "get") {
     response = await get(Uri.parse(url), headers: headers);
   } else if (method == "post") {
-    response = await post(Uri.parse(url),
-        body: body, headers: headers, encoding: encoding);
+    response = await post(Uri.parse(url), body: body, headers: headers, encoding: encoding);
   } else if (method == "put") {
-    response = await put(Uri.parse(url),
-        body: body, headers: headers, encoding: encoding);
+    response = await put(Uri.parse(url), body: body, headers: headers, encoding: encoding);
   } else if (method == "patch") {
-    response = await patch(Uri.parse(url),
-        body: body, headers: headers, encoding: encoding);
+    response = await patch(Uri.parse(url), body: body, headers: headers, encoding: encoding);
   } else if (method == "delete") {
-    response = await delete(Uri.parse(url),
-        body: body, headers: headers, encoding: encoding);
+    response = await delete(Uri.parse(url), body: body, headers: headers, encoding: encoding);
   } else if (method == "head") {
     response = await head(Uri.parse(url), headers: headers);
   } else {

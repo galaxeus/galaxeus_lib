@@ -1,6 +1,6 @@
 // ignore_for_file: non_constant_identifier_names
 
-part of galaxeus_lib;
+import 'package:galaxeus_lib/galaxeus_lib.dart';
 
 extension GalaxeusExtensionList on List {
   List cloneAndRandom(List array) {

@@ -1,19 +1,83 @@
-// ignore_for_file: unnecessary_brace_in_string_interps
-part of galaxeus_lib;
+// ignore_for_file: unnecessary_brace_in_string_interps, non_constant_identifier_names
+//
 
-String jsonToIsar(
+import 'dart:convert';
+
+import 'package:galaxeus_lib/galaxeus_lib.dart';
+import 'package:universal_io/io.dart';
+
+class IsarDataScript {
+  String className;
+  List<String> datas;
+  IsarDataScript({
+    required this.className,
+    required this.datas,
+  });
+  String get first {
+    return datas.first;
+  }
+
+  String get last {
+    return datas.last;
+  }
+
+  String get first_name {
+    return "${className.camelCaseClass().toLowerCase()}.dart";
+  }
+
+  String get last_name {
+    return "${className.camelCaseClass().toLowerCase()}.g.dart";
+  }
+
+  Future<Directory> saveToFile(Directory output) async {
+    if (!output.existsSync()) {
+      await output.create(recursive: true);
+    }
+    String output_path = output.path;
+    String output_first_name = output_path;
+    String output_last_name = output_path;
+    if (output_path[output_path.length - 1] == "/") {
+      output_first_name = "${output_first_name}${output_first_name}";
+      output_first_name = "${output_first_name}${output_first_name}";
+    } else if (output_path[output_path.length - 1] == r"\") {
+      output_first_name = "${output_first_name}${output_first_name}";
+      output_first_name = "${output_first_name}${output_first_name}";
+    } else {
+      if (Platform.isWindows) {
+        output_first_name = "${output_first_name}\\${output_first_name}";
+        output_first_name = "${output_first_name}\\${output_first_name}";
+      } else {
+        output_first_name = "${output_first_name}/${output_first_name}";
+        output_first_name = "${output_first_name}/${output_first_name}";
+      }
+    }
+    await File(output_first_name).writeAsString(first);
+    await File(output_last_name).writeAsString(last);
+    return output;
+  }
+}
+
+IsarDataScript jsonToIsar(
   Map<String, dynamic> data, {
   String className = "Root",
   bool isMain = true,
   bool isUseClassName = false,
   String? comment,
 }) {
-  return jsonToIsarDynamic(
-    data,
+  return IsarDataScript(
     className: className,
-    isMain: isMain,
-    isUseClassName: isUseClassName,
-    comment: comment,
+    datas: [
+      jsonToIsarDynamic(
+        data,
+        className: className,
+        isMain: isMain,
+        isUseClassName: isUseClassName,
+        comment: comment,
+      ),
+      """
+part "${className.camelCaseClass().toLowerCase()}.dart";
+"""
+    ],
   );
 }
 
@@ -29,7 +93,7 @@ String jsonToIsarDynamic(
   String classMessage = """
 ${((isMain) ? """
 // ignore_for_file: non_constant_identifier_names
-// import 'dart:convert';
+import 'dart:convert';
 import 'package:isar/isar.dart';
 part "${className.camelCaseClass().toLowerCase()}.g.dart";
 
@@ -53,6 +117,7 @@ class ${className} {
 
   
 """;
+  String operator_data = "";
   data.forEach((key, value) {
     String nameClass = key.camelCaseClass();
     if (isUseClassName) {
@@ -75,6 +140,9 @@ class ${className} {
         paramJson: (text) {
           classDataCreateJson += text;
         },
+        operatorData: (text) {
+          operator_data += text;
+        },
       );
     }
     if (value is int) {
@@ -93,6 +161,9 @@ class ${className} {
         paramJson: (text) {
           classDataCreateJson += text;
         },
+        operatorData: (text) {
+          operator_data += text;
+        },
       );
     } else if (value is double) {
       classMessage += textToFunctionIsar(
@@ -109,6 +180,9 @@ class ${className} {
         },
         paramJson: (text) {
           classDataCreateJson += text;
+        },
+        operatorData: (text) {
+          operator_data += text;
         },
       );
     } else if (value is num) {
@@ -127,6 +201,9 @@ class ${className} {
         paramJson: (text) {
           classDataCreateJson += text;
         },
+        operatorData: (text) {
+          operator_data += text;
+        },
       );
     }
     if (value is bool) {
@@ -144,6 +221,9 @@ class ${className} {
         },
         paramJson: (text) {
           classDataCreateJson += text;
+        },
+        operatorData: (text) {
+          operator_data += text;
         },
       );
     }
@@ -165,8 +245,17 @@ class ${className} {
         paramJson: (text) {
           classDataCreateJson += text;
         },
+        operatorData: (text) {
+          operator_data += text;
+        },
       );
-      classMessages.add(jsonToIsar(value.cast<String, dynamic>(), className: nameClass, isMain: false, isUseClassName: isUseClassName, comment: comment));
+      classMessages.add(jsonToIsar(
+        value.cast<String, dynamic>(),
+        className: nameClass,
+        isMain: false,
+        isUseClassName: isUseClassName,
+        comment: comment,
+      ).first);
     }
 
     if (value is List) {
@@ -190,6 +279,9 @@ class ${className} {
             paramJson: (text) {
               classDataCreateJson += text;
             },
+            operatorData: (text) {
+              operator_data += text;
+            },
           );
           classMessages.add(
             jsonToIsar(
@@ -198,7 +290,7 @@ class ${className} {
               isMain: false,
               isUseClassName: isUseClassName,
               comment: comment,
-            ),
+            ).first,
           );
         }
         if (value.first is bool) {
@@ -218,6 +310,9 @@ class ${className} {
             },
             paramJson: (text) {
               classDataCreateJson += text;
+            },
+            operatorData: (text) {
+              operator_data += text;
             },
           );
         }
@@ -239,6 +334,9 @@ class ${className} {
             paramJson: (text) {
               classDataCreateJson += text;
             },
+            operatorData: (text) {
+              operator_data += text;
+            },
           );
         }
         if (value.first is int) {
@@ -259,6 +357,9 @@ class ${className} {
             paramJson: (text) {
               classDataCreateJson += text;
             },
+            operatorData: (text) {
+              operator_data += text;
+            },
           );
         } else if (value.first is double) {
           classMessage += textToFunctionIsar(
@@ -278,6 +379,9 @@ class ${className} {
             paramJson: (text) {
               classDataCreateJson += text;
             },
+            operatorData: (text) {
+              operator_data += text;
+            },
           );
         } else if (value.first is num) {
           classMessage += textToFunctionIsar(
@@ -296,6 +400,9 @@ class ${className} {
             },
             paramJson: (text) {
               classDataCreateJson += text;
+            },
+            operatorData: (text) {
+              operator_data += text;
             },
           );
         }
@@ -317,6 +424,9 @@ class ${className} {
             paramJson: (text) {
               classDataCreateJson += text;
             },
+            operatorData: (text) {
+              operator_data += text;
+            },
           );
         }
       } else {
@@ -336,6 +446,9 @@ class ${className} {
           },
           paramJson: (text) {
             classDataCreateJson += text;
+          },
+          operatorData: (text) {
+            operator_data += text;
           },
         );
       }
@@ -359,6 +472,9 @@ class ${className} {
         paramJson: (text) {
           classDataCreateJson += text;
         },
+        operatorData: (text) {
+          operator_data += text;
+        },
       );
     }
   });
@@ -375,6 +491,35 @@ class ${className} {
 
   classMessage += """
  
+  /// operator map data
+   operator [](key) {
+    return toJson()[key];
+  }
+ 
+  /// operator map data
+  void operator []=(key, value) {
+    ${operator_data}
+  }
+
+  /// return original data json
+  Map toMap() {
+    return toJson();
+  }
+
+  /// return original data json
+  Map toJson() {
+    
+    return 
+      ${classDataCreateJson}
+    };
+  }
+
+  /// return string data encode json original data
+  @override
+  String toString() {
+    return json.encode(toJson());
+  }
+
 }""";
 
   classMessage += "\n\n${classMessages.join("\n\n")}";
@@ -393,6 +538,7 @@ String textToFunctionIsar({
   required void Function(String text) callback,
   required void Function(String text) paramFunction,
   required void Function(String text) paramJson,
+  required void Function(String text) operatorData,
 }) {
   comment ??= "";
   if (value is String) {
@@ -404,6 +550,17 @@ String textToFunctionIsar({
   }
 
   String nameMethod = key.replaceAll(RegExp(r"^(@|[0-9]+)", caseSensitive: false), "special_");
+
+  operatorData.call("""
+
+
+    if (key == "${key}") {
+      ${nameMethod} = value;
+    }
+
+
+""");
+
   if (isClass) {
     if (isList) {
       paramFunction.call("""

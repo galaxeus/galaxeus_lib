@@ -1,5 +1,3 @@
-part of galaxeus_lib;
-
 extension GalaxeusRegExpExtension on RegExp {
   bool hashData(dynamic input) {
     try {
