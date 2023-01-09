@@ -19,8 +19,9 @@ export "src/args.dart";
 export 'src/captcha.dart';
 export 'src/device_id.dart';
 export 'src/event_emitter.dart';
-export 'src/fetch.dart';
-export 'src/tcp_client.dart';
+export 'src/fetch.dart'; 
+export 'src/tcp_client.dart' if (dart.library.html) 'src/tcp_client_web.dart';
+
 export 'src/tcp_server.dart';
 export 'src/utils.dart';
 export 'src/websocket_client.dart';

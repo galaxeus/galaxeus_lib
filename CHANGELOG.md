@@ -1,3 +1,6 @@
+## 0.0.38
+- fix flutter web
+  
 ## 0.0.35
 - remove package path
 
