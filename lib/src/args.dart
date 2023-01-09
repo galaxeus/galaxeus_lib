@@ -1,5 +1,3 @@
-
-
 class Args {
   List<String> arguments = [];
   Args(List<String> args) {

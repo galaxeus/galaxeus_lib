@@ -1,4 +1,4 @@
-// ignore_for_file: unnecessary_brace_in_string_interps, empty_catches 
+// ignore_for_file: unnecessary_brace_in_string_interps, empty_catches
 
 String jsonToMessage(
   Map data, {
@@ -18,7 +18,7 @@ String jsonToMessage(
     return "<code>$text</code>";
   }
 
-  late String message = "";
+  String message = "";
   data.forEach((key, loopData) {
     try {
       if (loopData is Map) {
@@ -34,7 +34,7 @@ String jsonToMessage(
         String listToMessage({
           required List datas,
         }) {
-          late String message = "";
+          String message = "";
           for (var i = 0; i < datas.length; i++) {
             var loopData = datas[i];
             if (loopData is Map) {

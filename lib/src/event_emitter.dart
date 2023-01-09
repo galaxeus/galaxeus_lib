@@ -115,7 +115,8 @@ class EventEmitter {
 
     if (_listeners.containsKey(eventName)) {
       var subs = _listeners[eventName]!;
-      subs.removeWhere((element) => element.eventName == eventName && element.callback == callback);
+      subs.removeWhere((element) =>
+          element.eventName == eventName && element.callback == callback);
     }
   }
 
@@ -173,7 +174,8 @@ class EventEmitter {
   int get count => _listeners.length;
 
   /// Get the list of subscribers for a particular event.
-  int getListenersCount(String event) => _listeners.containsKey(event) ? _listeners[event]!.length : 0;
+  int getListenersCount(String event) =>
+      _listeners.containsKey(event) ? _listeners[event]!.length : 0;
 }
 
 /// Handler for cancelling the event registration.

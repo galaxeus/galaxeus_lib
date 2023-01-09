@@ -3,9 +3,11 @@
 
 Map jsonEach({
   required Map data,
-  required dynamic Function(dynamic key, dynamic value, bool isList, bool isMapInList) builder,
+  required dynamic Function(
+          dynamic key, dynamic value, bool isList, bool isMapInList)
+      builder,
 }) {
-  late Map jsonData = {};
+  Map jsonData = {};
 
   data.forEach((key, value) {
     if (value is Map) {
@@ -22,7 +24,9 @@ Map jsonEach({
 List jsonListEach({
   required String key,
   required List data,
-  required dynamic Function(dynamic key, dynamic value, bool isList, bool isMapInList) builder,
+  required dynamic Function(
+          dynamic key, dynamic value, bool isList, bool isMapInList)
+      builder,
 }) {
   return data.map((e) {
     if (e is Map) {

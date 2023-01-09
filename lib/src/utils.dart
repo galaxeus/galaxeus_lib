@@ -1,6 +1,8 @@
 String convertToAgo(int? timestamp) {
   try {
-    Duration diff = DateTime.now().difference(DateTime.fromMillisecondsSinceEpoch(timestamp ?? DateTime.now().millisecondsSinceEpoch));
+    Duration diff = DateTime.now().difference(
+        DateTime.fromMillisecondsSinceEpoch(
+            timestamp ?? DateTime.now().millisecondsSinceEpoch));
 
     if (diff.inDays >= 1) {
       return '${diff.inDays} day(s) ago';
@@ -24,7 +26,8 @@ String convertToAgo(int? timestamp) {
 
 String convertToAgoFromDateTime(DateTime dateTime) {
   try {
-    Duration diff = DateTime.now().difference(DateTime.fromMillisecondsSinceEpoch(dateTime.millisecondsSinceEpoch));
+    Duration diff = DateTime.now().difference(
+        DateTime.fromMillisecondsSinceEpoch(dateTime.millisecondsSinceEpoch));
     if (diff.inDays >= 1) {
       return '${diff.inDays} day(s) ago';
     } else if (diff.inHours >= 1) {

@@ -1,4 +1,7 @@
 ## 0.0.35
+- remove package path
+
+## 0.0.35
 - add json to isar
 
 ## 0.0.34

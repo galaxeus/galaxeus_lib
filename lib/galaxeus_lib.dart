@@ -19,7 +19,7 @@ export "src/args.dart";
 export 'src/captcha.dart';
 export 'src/device_id.dart';
 export 'src/event_emitter.dart';
-export 'src/fetch.dart';  
+export 'src/fetch.dart';
 export 'src/tcp_client.dart';
 export 'src/tcp_server.dart';
 export 'src/utils.dart';
@@ -32,7 +32,8 @@ String getUuid(int length, {String? text}) {
     ch = text;
   }
   Random r = Random();
-  return String.fromCharCodes(Iterable.generate(length, (_) => ch.codeUnitAt(r.nextInt(ch.length))));
+  return String.fromCharCodes(
+      Iterable.generate(length, (_) => ch.codeUnitAt(r.nextInt(ch.length))));
 }
 
 T getRandomElement<T>(List<T> list) {

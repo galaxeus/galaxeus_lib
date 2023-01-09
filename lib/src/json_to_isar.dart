@@ -549,7 +549,8 @@ String textToFunctionIsar({
     nameClass = "${className}${key.camelCaseClass()}";
   }
 
-  String nameMethod = key.replaceAll(RegExp(r"^(@|[0-9]+)", caseSensitive: false), "special_");
+  String nameMethod =
+      key.replaceAll(RegExp(r"^(@|[0-9]+)", caseSensitive: false), "special_");
 
   operatorData.call("""
 

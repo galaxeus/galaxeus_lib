@@ -1,15 +1,13 @@
-
-
 Map jsonUpdate({required Map data, required Map newData}) {
   newData.forEach((key, value) {
     if (value is Map) {
       if (data.containsKey(key)) {
         if (data[key] is Map) {
-          late Map dataSub = {};
+          Map dataSub = {};
           (data[key] as Map).forEach((keySub, valueSub) {
             dataSub[keySub] = valueSub;
           });
-          late Map newDataSub = {};
+          Map newDataSub = {};
           (newData[key] as Map).forEach((keySub, valueSub) {
             newDataSub[keySub] = valueSub;
           });
@@ -25,11 +23,11 @@ Map jsonUpdate({required Map data, required Map newData}) {
           List newDataSubs = (newData[key] as List);
           if (dataSubs.first is Map) {
             if (newDataSubs.first is Map) {
-               Map dataMap = {};
+              Map dataMap = {};
               (dataSubs.first as Map).forEach((keySub, valueSub) {
                 dataMap[keySub] = valueSub;
               });
-              late Map newDataMap = {};
+              Map newDataMap = {};
               (newDataSubs.first as Map).forEach((keySub, valueSub) {
                 newDataMap[keySub] = valueSub;
               });

@@ -7,11 +7,13 @@ import 'package:universal_io/io.dart';
 
 class TcpSocketServer {
   EventEmitter emitter = EventEmitter();
-  late String event_update;
+  String event_update;
   late ServerSocket server;
   late SecureServerSocket server_secure;
 
-  TcpSocketServer({this.event_update = "tcp_socket_update"});
+  TcpSocketServer({
+    this.event_update = "tcp_socket_update",
+  });
   Future<void> listen({
     required String host,
     required int port,
@@ -68,7 +70,7 @@ class TcpSocketServer {
   //   String uuid = getRandom(15);
   //   parameters["@extra"] = uuid;
   //   emit(socketClient, method, parameters);
-  //   late Map result = {};
+  //   Map result = {};
   //   on("update", (update, socketClient) {
   //     if (update["@extra"] == uuid) {
   //       result = update;

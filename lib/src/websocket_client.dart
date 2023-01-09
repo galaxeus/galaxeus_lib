@@ -7,13 +7,13 @@ import 'package:galaxeus_lib/galaxeus_lib.dart';
 import 'package:universal_io/io.dart';
 
 class WebSocketClient {
-  late String url;
-  late Iterable<String>? protocols;
-  late Map<String, dynamic>? headers;
-  late Duration? pingInterval;
-  late bool isConnect = false;
+  String url;
+  Iterable<String>? protocols;
+  Map<String, dynamic>? headers;
+  Duration? pingInterval;
+  bool isConnect = false;
   late EventEmitter event_emitter;
-  late List clients = [];
+  List clients = [];
   late WebSocket socket;
   late String event_name_update;
   late String event_name_connection;
@@ -88,9 +88,12 @@ class WebSocketClient {
                   "status": "disconnect",
                 });
               }
-              Timer.periodic(pingInterval ?? Duration(seconds: 2), (timer) async {
+              Timer.periodic(pingInterval ?? Duration(seconds: 2),
+                  (timer) async {
                 try {
-                  await connect(onDataUpdate: onDataUpdate, onDataConnection: onDataConnection);
+                  await connect(
+                      onDataUpdate: onDataUpdate,
+                      onDataConnection: onDataConnection);
                 } catch (e) {}
                 if (isConnect) {
                   timer.cancel();
@@ -131,7 +134,8 @@ class WebSocketClient {
                 "status": "reconnection",
               });
             }
-            await connect(onDataUpdate: onDataUpdate, onDataConnection: onDataConnection);
+            await connect(
+                onDataUpdate: onDataUpdate, onDataConnection: onDataConnection);
           } catch (e) {
             if (onDataConnection != null) {
               onDataConnection.call({
@@ -150,7 +154,8 @@ class WebSocketClient {
     }
   }
 
-  Listener on(String name, Function(dynamic update) callback, {bool isThrowError = false}) {
+  Listener on(String name, Function(dynamic update) callback,
+      {bool isThrowError = false}) {
     return event_emitter.on(name, null, (ev, context) {
       try {
         if (ev.eventData != null) {

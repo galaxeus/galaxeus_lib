@@ -45,7 +45,7 @@ ${((isMain) ? "// ignore_for_file: non_constant_identifier_names\nimport 'dart:c
 
 ${comment}
 class ${className} {
-  late Map rawData;
+  Map rawData;
 
 """;
   String classData = """
@@ -171,7 +171,11 @@ class ${className} {
           classDataCreateJson += text;
         },
       );
-      classMessages.add(jsonToDartDynamic(value.cast<String, dynamic>(), className: nameClass, isMain: false, isUseClassName: isUseClassName, comment: comment));
+      classMessages.add(jsonToDartDynamic(value.cast<String, dynamic>(),
+          className: nameClass,
+          isMain: false,
+          isUseClassName: isUseClassName,
+          comment: comment));
     }
 
     if (value is List) {
@@ -195,7 +199,12 @@ class ${className} {
               classDataCreateJson += text;
             },
           );
-          classMessages.add(jsonToDartDynamic((value.first as Map).cast<String, dynamic>(), className: nameClass, isMain: false, isUseClassName: isUseClassName, comment: comment));
+          classMessages.add(jsonToDartDynamic(
+              (value.first as Map).cast<String, dynamic>(),
+              className: nameClass,
+              isMain: false,
+              isUseClassName: isUseClassName,
+              comment: comment));
         }
         if (value.first is bool) {
           classMessage += textToFunctionDynamic(
@@ -409,7 +418,7 @@ ${((isMain) ? "// ignore_for_file: non_constant_identifier_names\nimport 'dart:c
 
 ${comment}
 class ${className} {
-  late Map rawData;
+  Map rawData;
 
   ${comment}
   ${className}(this.rawData);
@@ -426,8 +435,8 @@ class ${className} {
 
 """;
   String classDataCreateJson = """
-    late Map jsonData = ${className}.defaultData;
-    late Map jsonCreate = {
+    Map jsonData = ${className}.defaultData;
+    Map jsonCreate = {
   
 """;
   data.forEach((key, value) {
@@ -519,7 +528,11 @@ class ${className} {
           classDataCreateJson += text;
         },
       );
-      classMessages.add(jsonToDart(value.cast<String, dynamic>(), className: nameClass, isMain: false, isUseClassName: isUseClassName, comment: comment));
+      classMessages.add(jsonToDart(value.cast<String, dynamic>(),
+          className: nameClass,
+          isMain: false,
+          isUseClassName: isUseClassName,
+          comment: comment));
     }
 
     if (value is List) {
@@ -540,7 +553,12 @@ class ${className} {
               classDataCreateJson += text;
             },
           );
-          classMessages.add(jsonToDart((value.first as Map).cast<String, dynamic>(), className: nameClass, isMain: false, isUseClassName: isUseClassName, comment: comment));
+          classMessages.add(jsonToDart(
+              (value.first as Map).cast<String, dynamic>(),
+              className: nameClass,
+              isMain: false,
+              isUseClassName: isUseClassName,
+              comment: comment));
         }
         if (value.first is bool) {
           classMessage += textToFunction(
@@ -684,7 +702,7 @@ ${classDataCreateJson}
           jsonData[key] = value;
         }
       } catch (e, stack) {
-        print(\"${className} \${e.toString()}, \${stack.toString()}\");
+        print("${className} \${e.toString()}, \${stack.toString()}");
       }
     });
 return ${className}(jsonData);""";
@@ -743,7 +761,8 @@ String textToFunction({
     nameClass = "${className}${key.camelCaseClass()}";
   }
 
-  String nameMethod = key.replaceAll(RegExp(r"^(@|[0-9]+)", caseSensitive: false), "special_");
+  String nameMethod =
+      key.replaceAll(RegExp(r"^(@|[0-9]+)", caseSensitive: false), "special_");
   if (isClass) {
     if (isList) {
       paramFunction.call("""
@@ -854,7 +873,8 @@ String textToFunctionDynamic({
     nameClass = "${className}${key.camelCaseClass()}";
   }
 
-  String nameMethod = key.replaceAll(RegExp(r"^(@|[0-9]+)", caseSensitive: false), "special_");
+  String nameMethod =
+      key.replaceAll(RegExp(r"^(@|[0-9]+)", caseSensitive: false), "special_");
   if (isClass) {
     if (isList) {
       paramFunction.call("""
@@ -875,7 +895,7 @@ String textToFunctionDynamic({
 """);
       return """
   ${comment}
-  late List<${nameClass}?>? ${nameMethod};
+  List<${nameClass}?>? ${nameMethod};
 
 """;
     }
@@ -898,7 +918,7 @@ String textToFunctionDynamic({
     return """
 
   ${comment}
-  late ${nameClass} ${nameMethod} = ${nameClass}({});
+  ${nameClass} ${nameMethod} = ${nameClass}({});
 
 """;
   }
@@ -922,7 +942,7 @@ String textToFunctionDynamic({
     return """
 
   ${comment}
-  late List<${returnType}?>? ${nameMethod};
+  List<${returnType}?>? ${nameMethod};
 
 """;
   }
@@ -945,7 +965,7 @@ String textToFunctionDynamic({
   return """
 
   ${comment}
-  late $returnType? ${nameMethod};
+  $returnType? ${nameMethod};
 
 """;
 }

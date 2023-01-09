@@ -26,17 +26,21 @@ Future<Response> fetch(
   if (options.containsKey("method") && options["method"] is String) {
     method = options["method"].toString().toLowerCase();
   }
-  late Response response;
+  Response response;
   if (method == "get") {
     response = await get(Uri.parse(url), headers: headers);
   } else if (method == "post") {
-    response = await post(Uri.parse(url), body: body, headers: headers, encoding: encoding);
+    response = await post(Uri.parse(url),
+        body: body, headers: headers, encoding: encoding);
   } else if (method == "put") {
-    response = await put(Uri.parse(url), body: body, headers: headers, encoding: encoding);
+    response = await put(Uri.parse(url),
+        body: body, headers: headers, encoding: encoding);
   } else if (method == "patch") {
-    response = await patch(Uri.parse(url), body: body, headers: headers, encoding: encoding);
+    response = await patch(Uri.parse(url),
+        body: body, headers: headers, encoding: encoding);
   } else if (method == "delete") {
-    response = await delete(Uri.parse(url), body: body, headers: headers, encoding: encoding);
+    response = await delete(Uri.parse(url),
+        body: body, headers: headers, encoding: encoding);
   } else if (method == "head") {
     response = await head(Uri.parse(url), headers: headers);
   } else {
@@ -61,9 +65,9 @@ extension OnFetch on Response {
 }
 
 class FetchOption {
-  late String method;
-  late Map<String, String>? headers;
-  late Object? body;
+  String method;
+  Map<String, String>? headers;
+  Object? body;
   FetchOption({
     required this.method,
     this.headers,

@@ -4,7 +4,7 @@ import 'package:galaxeus_lib/galaxeus_lib.dart';
 
 extension GalaxeusExtensionList on List {
   List cloneAndRandom(List array) {
-    late List<String> random_datas = [];
+    List<String> random_datas = [];
     for (var index = 0; index < array.length; index++) {
       random_datas.add(array[index]);
     }

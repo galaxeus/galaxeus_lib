@@ -24,7 +24,7 @@ class Captcha {
       throw "captchaLength melebihi emojis length";
     }
     Map jsonKey = emojis[Random().nextInt(emojis.length)];
-    late List<Map> result = [jsonKey];
+    List<Map> result = [jsonKey];
 
     while (true) {
       if (result.length == captchaLength) {
@@ -35,7 +35,7 @@ class Captcha {
       }
       Map randomEmoji = emojis[Random().nextInt(emojis.length)];
       if (!DeepCollectionEquality().equals(randomEmoji, jsonKey)) {
-        late bool isNotFoundSame = true;
+        bool isNotFoundSame = true;
         for (var index = 0; index < result.length; index++) {
           if (DeepCollectionEquality().equals(randomEmoji, result[index])) {
             isNotFoundSame = false;
