@@ -64,7 +64,7 @@ class TcpSocketClient {
           socket = await Socket.connect(
             host,
             port,
-            sourceAddress: sourceAddress, 
+            sourceAddress: sourceAddress,
             timeout: timeout,
           );
           StreamSubscription<Uint8List> listen = socket.listen(
